@@ -8,9 +8,11 @@ public class ObstacleSpawner : MonoBehaviour
     float offsetX, offsetY;
 
     float lastSpawnTime;
-    const float timeBetweenSpawns = 0.7f;
-
-    public GameObject obstaclePrefab;
+    
+    public GameObject obstaclePrefab; // SerializeField?
+    public Vector2 spawnSizeMinMax;
+    public Vector2 timeBetweenSpawns;
+    public float rotationMaxAngle;
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +29,25 @@ public class ObstacleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - lastSpawnTime >= timeBetweenSpawns)
+        if (Time.time >= lastSpawnTime)
         {
-            lastSpawnTime = Time.time;
+            float secondsBtSpawns = Mathf.Lerp(timeBetweenSpawns.y, timeBetweenSpawns.x, Difficulty.GetDiffPct());
+            lastSpawnTime = Time.time + secondsBtSpawns;
 
-            float x = Random.Range(-widthHalfSize + offsetX, widthHalfSize - offsetX);
-            float y = heightHalfSize + offsetY;
-            Vector2 pos = new Vector2(x, y);
-            GameObject obj = Instantiate(obstaclePrefab, pos, Quaternion.identity);
+            float xScale = Random.Range(spawnSizeMinMax.x, spawnSizeMinMax.y);
+            float yScale = Random.Range(spawnSizeMinMax.x, spawnSizeMinMax.y);
+            offsetX = xScale * 0.5f; 
+            offsetY = yScale;
+
+            float spawnAngle = Random.Range(-rotationMaxAngle, rotationMaxAngle);
+            float posX = Random.Range(-widthHalfSize + offsetX, widthHalfSize - offsetX);
+            float posY = heightHalfSize + offsetY;
+
+            Vector2 pos = new Vector2(posX, posY);
+            Quaternion rot = Quaternion.Euler(Vector3.forward * spawnAngle);
+            GameObject obj = Instantiate(obstaclePrefab, pos, rot);
+
+            obj.transform.localScale = new Vector2(xScale, yScale);
 
             obj.transform.parent = transform;
         }
