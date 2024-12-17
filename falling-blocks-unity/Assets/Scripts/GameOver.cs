@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public GameObject gameoverObject;
+    public GameObject inGameCanvas;
+    public GameObject gameOverCanvas;
     public TextMeshProUGUI secondsSurvived;
     bool gameOver;
 
@@ -26,7 +27,8 @@ public class GameOver : MonoBehaviour
 
     void OnGameOver()
     {
-        gameoverObject.SetActive(true);
+        inGameCanvas.SetActive(false);
+        gameOverCanvas.SetActive(true);
         secondsSurvived.text = Mathf.RoundToInt(Time.timeSinceLevelLoad).ToString();
         gameOver = true;
     }
