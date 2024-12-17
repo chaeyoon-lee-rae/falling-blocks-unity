@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     float offsetX;
 
     public float speed;
+    public event System.Action OnPlayerDeath;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Obstacle")
         {
+            if(OnPlayerDeath != null) OnPlayerDeath();
             Destroy(gameObject);
         }
     }

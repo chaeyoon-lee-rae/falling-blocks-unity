@@ -9,6 +9,6 @@ public static class Difficulty
     const float secondsToMaxDiff = 60;
     public static float GetDiffPct()
     {
-        return Mathf.Clamp01(Time.time / secondsToMaxDiff);
+        return Mathf.Clamp01(Time.timeSinceLevelLoad / secondsToMaxDiff);
     }
 }
