@@ -13,7 +13,7 @@ public class MoveObstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offsetY = transform.localScale.y / 2;
+        offsetY = transform.localScale.y;
 
         speed = Mathf.Lerp(speedMinMax.x, speedMinMax.y, Difficulty.GetDiffPct());
     }
