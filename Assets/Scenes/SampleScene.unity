@@ -905,7 +905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d2588a3b389c749879703f4e914513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameoverObject: {fileID: 1617587995}
+  inGameCanvas: {fileID: 1540694063}
+  gameOverCanvas: {fileID: 1617587995}
   secondsSurvived: {fileID: 1767396945}
 --- !u!4 &1322345632
 Transform:
